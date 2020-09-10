@@ -1,3 +1,4 @@
+#https://www.codewars.com/kata/58902f676f4873338700011f/python
 def is_lucky(ticket):
     first_digits = ticket [:3]
     last_digits = ticket[3:]

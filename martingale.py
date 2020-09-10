@@ -1,3 +1,4 @@
+#https://www.codewars.com/kata/5eb34624fec7d10016de426e/python
 def martingale(bank, outcomes):
   stake = 100
   i = 0
