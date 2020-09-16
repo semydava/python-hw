@@ -1,0 +1,11 @@
+import math
+def choose(n,k):
+    #if k <= 0 or n <= 0:
+        #return False
+     fact_n = math.factorial(n)
+     fact_k = math.factorial(k)
+     difference = abs(n - k)
+     fact_diff = math.factorial(difference)
+     result = fact_n / (fact_k * fact_diff)
+     result = round(result)
+     return result
