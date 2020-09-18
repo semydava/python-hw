@@ -1,20 +1,13 @@
 #https://www.codewars.com/kata/5648b12ce68d9daa6b000099
 def number(bus_stops):
   left_people = 0 
-  index = 0
-  length = len(bus_stops)
-  
-  while index < length:
-    current_stop = bus_stops[index]
-    in_people = current_stop[0]
-    out_people = current_stop[1]
-
-    #return 0 if input data is wrong 
-    if index == 0 and current_stop[1] != 0:
-      return 0
+ 
+  for char in bus_stops:
+    in_people = char[0]
+    out_people = char[1]
+    left_people += in_people - out_people  
     
-    left_people += in_people - out_people 
-    index+=1
+     
   return left_people
 
 t = [[10,0],[3,5],[5,8]]
