@@ -5,7 +5,7 @@ def reverse_words(text):
   for char in separate_words:
     reversed_word = char[::-1]
     reverse_words = reverse_words + reversed_word + ' '
-    if char == text[len(text)-1]:
+    if separate_words.index(char) == len(separate_words)-1:
       reverse_words = reverse_words + reversed_word
 
   return reverse_words
