@@ -8,7 +8,7 @@ def revert_vovels(text):
       vovels_in_text += char
   reversed_vovels_in_text = vovels_in_text[::-1] 
 
-  print(reversed_vovels_in_text)
+  
   index = 0
   for element in text:
     if element in vovels_in_text:
