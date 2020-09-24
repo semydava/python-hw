@@ -22,4 +22,21 @@ def alphabet_war(fight):
     return "Let's fight again!"
  
 
-print(alphabet_war("z"))
+
+
+def fight(text):
+    """
+    >>> fight('')
+    "Let's fight again!"
+    >>> fight('abracadabra')
+    'Left side wins!'
+    >>> fight('z')
+    'Right side wins!'
+    >>> fight('zdqmwpbs')
+    "Let's fight again!"
+    >>> fight('zzzzs')
+    'Right side wins!'
+    >>> fight('wwwwwwz')
+    'Left side wins!'
+    """
+    return ''
