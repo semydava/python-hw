@@ -13,19 +13,13 @@ def alphabet_war(fight):
     elif char in right_letters:
       number2 = right_letters[char]
       sum_right += number2 
-  
   if sum_left > sum_right:
     return "Left side wins!"
   elif sum_right > sum_left: 
     return "Right side wins!"
   else:
     return "Let's fight again!"
- 
-
-
-
-def fight(text):
-    """
+  """
     >>> fight('')
     "Let's fight again!"
     >>> fight('abracadabra')
@@ -38,5 +32,4 @@ def fight(text):
     'Right side wins!'
     >>> fight('wwwwwwz')
     'Left side wins!'
-    """
-    return ''
+  """
