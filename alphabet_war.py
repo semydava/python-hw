@@ -1,17 +1,17 @@
 #https://www.codewars.com/kata/59377c53e66267c8f6000027/solutions/python
 def alphabet_war(fight):
    """
-    >>> fight('')
+    >>> alphabet_war('')
     "Let's fight again!"
-    >>> fight('abracadabra')
+    >>> alphabet_war('abracadabra')
     'Left side wins!'
-    >>> fight('z')
+    >>> alphabet_war('z')
     'Right side wins!'
-    >>> fight('zdqmwpbs')
+    >>> alphabet_war('zdqmwpbs')
     "Let's fight again!"
-    >>> fight('zzzzs')
+    >>> alphabet_war('zzzzs')
     'Right side wins!'
-    >>> fight('wwwwwwz')
+    >>> alphabet_war('wwwwwwz')
     'Left side wins!'
   """
   left_letters = {'w':4, 'p':3, 'b':2,'s':1}
