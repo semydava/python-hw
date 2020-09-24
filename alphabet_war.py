@@ -1,5 +1,19 @@
 #https://www.codewars.com/kata/59377c53e66267c8f6000027/solutions/python
 def alphabet_war(fight):
+   """
+    >>> fight('')
+    "Let's fight again!"
+    >>> fight('abracadabra')
+    'Left side wins!'
+    >>> fight('z')
+    'Right side wins!'
+    >>> fight('zdqmwpbs')
+    "Let's fight again!"
+    >>> fight('zzzzs')
+    'Right side wins!'
+    >>> fight('wwwwwwz')
+    'Left side wins!'
+  """
   left_letters = {'w':4, 'p':3, 'b':2,'s':1}
   right_letters = {'m':4, 'q':3,'d':2, 'z':1}
   sum_left = 0
@@ -19,17 +33,4 @@ def alphabet_war(fight):
     return "Right side wins!"
   else:
     return "Let's fight again!"
-  """
-    >>> fight('')
-    "Let's fight again!"
-    >>> fight('abracadabra')
-    'Left side wins!'
-    >>> fight('z')
-    'Right side wins!'
-    >>> fight('zdqmwpbs')
-    "Let's fight again!"
-    >>> fight('zzzzs')
-    'Right side wins!'
-    >>> fight('wwwwwwz')
-    'Left side wins!'
-  """
+ 
