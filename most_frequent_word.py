@@ -5,17 +5,16 @@ def most_frequent_word(text):
     'i'
     >>> most_frequent_word("be the change that you wish to see in the world")
     'the'
+
     """
     number_repeat = {}
     text = text.split()
     for char in text:
-      number = text.count(char) 
-      if number > 1: 
-        number_repeat[char] = number
+      number = text.count(char)  
+      number_repeat[char] = number
     if number_repeat: 
       maximum = max(number_repeat.values())
       for key, value in number_repeat.items():
         if value == maximum:
           return key 
-    else: 
-      return 'All words are equal'
+   print(most_frequent_word('He is is hardworking man'))
