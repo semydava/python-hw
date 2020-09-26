@@ -10,8 +10,11 @@ def most_frequent_word(text):
     number_repeat = {}
     text = text.split()
     for char in text:
-      number = text.count(char)  
-      number_repeat[char] = number
+        if char not in number_repeat:
+            number_repeat[char] = 0
+        number_repeat[char] += 1
+      #number = text.count(char)  
+      #number_repeat[char] = number
     if number_repeat: 
       maximum = max(number_repeat.values())
       for key, value in number_repeat.items():
