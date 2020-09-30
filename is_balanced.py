@@ -1,4 +1,3 @@
-#https://github.com/inesusvet/pyclub/blob/master/problems/open_and_close.py
 def is_balanced(text):
     """
     >>> is_balanced('')
@@ -20,41 +19,52 @@ def is_balanced(text):
     >>> is_balanced('(Sensei (says) (yes!))')
     True
     """
+    possible_brackets = ['(',')','[',']','{','}']
+    opening_brackets = ['(','{','[']
     brackets =[]
     brackets_stack = []
     i = 0 
     if len(text) == 0:
       return True 
 
-    if text.count(')') != text.count('('):
-      return False
-
     for char in text:
-      if char == '(' or char == ')':
+      if char in possible_brackets:
         brackets.append(char)
-    
     
 
     for i in range(len(brackets)):
       element = brackets[i]
       
-      if element == '(':
+     
+      if element in opening_brackets:
         brackets_stack.append(element)
-        
+
       else:
         if len(brackets_stack)==0:
           return False
+      
         current_char = brackets_stack.pop()
-        
+
         if current_char == '(':
-          
-          if char != ')':
+          if element != ')':
             return False
+          
+       
+        if current_char == '{':
+          if element != '}':
+            return False 
+        
+
+        if current_char == '[':
+          if element != ']':
+            return False 
+
       i+=1
+
     if len(brackets_stack) != 0:
       return False
     return True
 
   
   
-print(is_balanced(')(Sensei (says) yes!)('))
+print(is_balanced('][({fff})]hasattr'))
