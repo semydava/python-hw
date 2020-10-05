@@ -35,7 +35,6 @@ def is_balanced(text,caps):
     else:
       value = char
       possible_brackets[key] = value
-  print(possible_brackets)
   brackets =[]
   brackets_stack = []
 
@@ -46,7 +45,6 @@ def is_balanced(text,caps):
   for char in text:
     if char in possible_brackets.keys() or char in possible_brackets.values():
       brackets.append(char)
-  print(brackets)
 
   for element in brackets:
     if element in possible_brackets and element in possible_brackets.values():
