@@ -19,19 +19,19 @@ def merge(intervals):
     if len(intervals_stack) == 0:
       intervals_stack.append(pair)
     else:
-      current_pair = intervals_stack[len(intervals_stack)-1]
+      current_pair = intervals_stack[-1]
       if current_pair[1]>=pair[0]:
+        intervals_stack.pop()
         if current_pair[1]<pair[1]:
           new_pair = [current_pair[0],pair[1]]
-          intervals_stack.remove(current_pair)
           intervals_stack.append(new_pair)
         else:
           new_pair = [current_pair[0],current_pair[1]]
-          intervals_stack.remove(current_pair)
           intervals_stack.append(new_pair)
+        
 
       else:
         intervals_stack.append(pair)       
   return intervals_stack
   
-print(merge([[1,4],[2,3]]))
+print(merge([[1, 3], [2, 6], [8, 10], [15, 18]]))
