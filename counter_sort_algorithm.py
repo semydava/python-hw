@@ -1,14 +1,16 @@
 def countSort(A):
-  C=[]
-  for i in range(100):
-    C+=[0]
-  for i in A:
-    C[i]+=1
-  j=0
-  for i in range(100):
-    if C[i]>0:
-      A[j]=i
-      j+=1
-  return A
+  h = max(A) + 1 
+  l = min(A)
+  d = (h - l)
+  C=[0]*d
+  sorted_numbers = []
+  for n in A: 
+    j = n-l
+    C[j] += 1
+  for i in range(d):
+    if C[i] > 0:
+      value = [i+l] * C[i]
+      sorted_numbers.extend(value)
 
-print(countSort([56,67,1,2,3,45,23,90,17]))
+  return sorted_numbers
+print(countSort([-2, 1, 4, -3, 5]))
