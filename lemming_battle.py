@@ -8,9 +8,8 @@ def is_alive(power):
     >>> is_alive(-10)
     False
     """
-    if power <= 0:
-      return False
-    return True
+    return power > 0 
+  
 
 def triage(warriors):
     """
@@ -18,12 +17,10 @@ def triage(warriors):
     >>> triage([10, 0, 5, -2])
     [10, 5]
     """
-    alive_warriors = []
-    for power in warriors:
-      if is_alive(power):
-        alive_warriors.append(power)
-
+    # list comprehension
+    alive_warriors = [power for power in warriors if is_alive(power)]
     return alive_warriors
+
 
 
 def fight(green, blue):
@@ -36,10 +33,7 @@ def fight(green, blue):
     >>> fight(10, 15)
     (-5, 5)
     """
-    left_power = []
-    left_power.append(green - blue)
-    left_power.append(blue - green)
-    return tuple(left_power)
+    return green - blue, blue - green
 
 
 def round(green, blue):
@@ -51,18 +45,12 @@ def round(green, blue):
     >>> round([10], [5])
     [(5,), (-5,)]
     """
-    round_result = []
-    green_round = []
-    blue_round = []
-    for (green_power,blue_power) in zip(green,blue):
-      current_round = (fight(green_power,blue_power))
-      green_round.append(current_round[0])
-      blue_round.append(current_round[1])
-  
-    round_result.append(tuple(green_round))
-    round_result.append(tuple(blue_round))
-    return round_result
-#print(round([10], [5]))
+    # list comprehension 
+    current_round = [fight(green_power,blue_power) for (green_power,blue_power) in zip(green,blue)]
+    green_round = [i[0] for i in current_round]
+    blue_round = [i[1] for i in current_round]
+    return tuple(green_round), tuple(blue_round)
+
 
 
 
@@ -76,14 +64,9 @@ def draw(army, size):
     >>> draw([1, 10, 2], 1)
     [10]
     """
-    army.sort(reverse = True)
-    strong_army =[]
-    if len(army) >= size:
-      for i in range(size):
-        strong_army.append(army[i])
-      return strong_army
-    return False
-#print(draw([1, 2, 3], 3))
+    army.sort(reverse = True)#O(nlog(n))
+    return army[:size]
+  
 
 
 def collect(army, warriors):
@@ -103,87 +86,30 @@ def lemming_battle(battlefield, green, blue):
     """
     Проводит войну между двумя армиями леммингов на заданном количестве полей.
     """
-    green_strong = draw(green, battlefield)
-    blue_strong = draw(blue,battlefield)
-    green_round = []
-    blue_round = []
-    green_alived = []
-    blue_alived = []
-    g =0
-    b=0
-    while g < len(green_strong) and b < len(blue_strong):
-        green.remove(green_strong[g])
-        blue.remove(blue_strong[b])
-        g+=1
-        b+=1
-    round_result = round(green_strong,blue_strong)
-    green_round.extend(list(round_result[0]))
-    blue_round.extend(list(round_result[1]))
-    green_alived = triage(green_round)
-    blue_alived = triage(blue_round)
-    green = collect(green,green_alived)
-    blue = collect(blue,blue_alived)
-    green_strong.clear()
-    blue_strong.clear()
-    green_round.clear()
-    blue_round.clear()
-    green_alived.clear()
-    blue_alived.clear()
-    if len(green) == 0 and len(blue) == 0:
-      return 'Green and Blue died'
+    while len(green)>0 and len(blue)>0:#O(n)
+      size = min([battlefield,len(green),len(blue)])#O(1)
+      g = draw(green, size)#O(nlog(n))
+      b = draw(blue,size)#O(nlog(n))
+      green = green[len(g):]#O(1)
+      blue = blue[len(b):]
+      g,b = round(g,b)#O(size)
+      g = triage(g)#O(k)
+      b = triage(b)
+      collect(green,g)
+      collect(blue,b)
+      green.sort(reverse = True)
+      blue.sort(reverse = True)
+    if len(blue) == 0 and len(green) != 0: 
+      result = 'Green wins: ' + ' '.join(str(i) for i in green)
+    elif len(green) == 0 and len(blue) != 0:
+      result = 'Blue wins: ' + ' '.join(str(i) for i in blue)
     else:
-      if len(green) != 0 and len(blue) != 0:
-        if len(green) < len(blue):
-          green_strong = draw(green,len(green))
-          blue_strong = draw(blue,len(green))
-          while g < len(green_strong) and b < len(blue_strong):
-            green.remove(green_strong[g])
-            blue.remove(blue_strong[b])
-            g+=1
-            b+=1
-          round_result = round(green_strong,blue_strong)
-          green_round.extend(list(round_result[0]))
-          blue_round.extend(list(round_result[1]))
-          green_alived = triage(green_round)
-          blue_alived = triage(blue_round)
-          green = collect(green,green_alived)
-          blue = collect(blue,blue_alived)
+      result = 'Green and Blue died'  
+    #O(n) * (O(nlogn) + nlogn + k +k) = O(n) * O(nlogn)=nˆ2logn
+    return result 
 
-        else:
-          green_strong = draw(green,len(blue))
-          blue_strong = draw(blue,len(blue))
-          while g < len(green_strong) and b < len(blue_strong):
-            print(green_strong[g])
-            green.remove(green_strong[g])
-            blue.remove(blue_strong[b])
-            g+=1
-            b+=1
-          print(green,blue)
-          round_result = round(green_strong,blue_strong)
-          green_round.extend(list(round_result[0]))
-          blue_round.extend(list(round_result[1]))
-          green_alived = triage(green_round)
-          blue_alived = triage(blue_round)
-          green = collect(green,green_alived)
-          blue = collect(blue,blue_alived)
-          print(green,blue)
+print(lemming_battle(10, [49], [825, 322, 981, 697, 564, 384]))
 
-
-      elif len(blue) == 0 and len(green) != 0:
-        return 'Green wins'
-      elif len(green) == 0 and len(blue) != 0:
-        return 'Blue wins' 
-    
-  
-print(lemming_battle(2, [15, 5], [15, 5, 5]))
-
-    
-
-
-
-
-
-    
 
 
 
